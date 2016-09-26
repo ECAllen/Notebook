@@ -13,7 +13,7 @@
       </array>
     </dict>
   </array>
-  <key>expanded</key><false/>
+  <key>expanded</key><true/>
   <key>nodeid</key><string>50dc4859-dee0-41ed-98c0-38327d47ecbd</string>
   <key>modified_time</key><integer>1464317648</integer>
   <key>content_type</key><string>application/x-notebook-dir</string>
@@ -22,8 +22,8 @@
   <key>title</key><string>Surf</string>
   <key>column_widths</key><dict>
     <key>created_time</key><integer>150</integer>
-    <key>modified_time</key><integer>1062</integer>
-    <key>title</key><integer>150</integer>
+    <key>modified_time</key><integer>1250</integer>
+    <key>title</key><integer>309</integer>
   </dict>
   <key>attr_defs</key><array>
     <dict>
