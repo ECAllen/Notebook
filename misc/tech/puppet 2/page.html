@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Notes Puppet 101</title>
+</head><body><br/>
+<i>Puppet</i>&nbsp;is an open-source IT automation tool. The Puppet Domain Specific Language (DSL) is a Ruby-based coding language that provides a precise and adaptable way to describe a desired state for each machine in your infrastructure. Once you've described a desired state, Puppet does the work to bring your systems in line and keep them there.<br/>
+<br/>
+<i>Lifecycle</i><br/>
+By default, the Puppet agent daemon runs in the background on all nodes you manage with Puppet. Every 30 minutes, the Puppet agent daemon requests a <i>catalog</i>&nbsp;from the Puppet master. The Puppet master parses all the classes applied to that node, builds the catalog to describe how the node is supposed to be configured, and returns this catalog to the node's Puppet agent. The agent then applies any changes necessary to bring the node in line with the state described by the catalog.<br/>
+<br/>
+<b><br/>
+</b><b>Commands</b><br/>
+<br/>
+Search modules<br/>
+puppet module search &lt;keyword&gt;<br/>
+<br/>
+Install a module<br/>
+puppet module install &lt;module name&gt; -v &lt;semantic version&gt;<br/>
+<br/>
+<i>modulepath</i>. The modulepath is where Puppet will look to find Puppet classes and other files and resources made available by any modules you download or create. For Puppet Enterprise, the default modulepath is /etc/puppetlabs/code/environments/production/modules.<br/>
+<br/>
+Default module path: <br/>
+/etc/puppetlabs/code/environments/production/modules<br/>
+&nbsp;<br/>
+Sytem facts(resources)<br/>
+facter<br/>
+facter ipaddress<br/>
+<br/>
+Install a node <br/>
+pe console -&gt; nodes -&gt; classification -&gt; add group<br/>
+<br/>
+pin node - add a node inidividually using it's cert<br/>
+<br/>
+add class to group <br/>
+pe console -&gt; nodes -&gt; classification -&gt; click on group -&gt; classes tab<br/>
+<br/>
+Trigger a run on the puppet agent<br/>
+puppet agent --test<br/>
+<br/>
+Inspect a resource <br/>
+puppet resource user root<br/>
+<br/>
+Describe a resource<br/>
+puppet describe user | less<br/>
+<br/>
+Edit a resource<br/>
+puppet resource -e user blah<br/>
+<br/>
+Delete a resource<br/>
+puppet resource package fortune-mod ensure=absent<br/>
+puppet resource package cowsay ensure=absent provider=gem<br/>
+<br/>
+Create one-off changes<br/>
+puppet apply -e "user { 'galatea': ensure =&gt; present, }"<br/>
+<br/>
+Create a manifest<br/>
+mkdir -p cowsaying/manifests<br/>
+vim cowsaying/manifests/cowsay.pp<br/>
+puppet parser validate cowsayings/manifests/cowsay.pp<br/>
+<br/>
+Create a include<br/>
+vim cowsayings/examples/cowsay.pp<br/>
+in the file -&gt; include cowsayings::cowsay<br/>
+<br/>
+vim cowsayings/manifests/init.pp<br/>
+code:<br/>
+class cowsayings {<br/>
+&nbsp; include cowsayings::cowsay<br/>
+&nbsp; include cowsayings::fortune<br/>
+}<br/>
+vim cowsayings/examples/init.pp<br/>
+code: <br/>
+include cowsayings <br/>
+<br/>
+get module path<br/>
+puppet master --configprint modulepath<br/>
+<br/>
+get list of installed modules<br/>
+puppet module list<br/>
+<br/>
+structure of a module:<br/>
+vimrc<br/>
+├── files<br/>
+├── manifests<br/>
+└── examples<br/>
+<br/>
+modulepaths:<br/>
+/etc/puppetlabs/code/environments/production/modules directory. This is where you keep modules for your production environment. (Site specific modules you need to be available for all environments are kept in /etc/puppetlabs/code/modules, and modules required by Puppet Enterprise itself are kept in the /opt/puppetlabs/puppet/modules directory.)<br/>
+<br/>
+URIs:<br/>
+puppet://{server hostname (optional)}/{mount point}/{remainder of path}<br/>
+<br/>
+/etc/puppetlabs/code/environments/production/modules/vimrc/files/vimrc, Puppet's URI abstraction shortens it to /modules/vimrc/vimrc. Combined with the implicit hostname, then, the attribute value pair for the source URI is:<br/>
+<br/>
+source =&gt; 'puppet:///modules/vimrc/vimrc',<br/>
+<br/>
+r10k<br/>
+<br/>
+Update a single module across all environments<br/>
+r10k deploy module apache<br/>
+<br/>
+This is useful for when you’re working on a module specified in a Puppetfile and want to update it across all environments.<br/>
+Update multiple modules across all environments<br/>
+r10k deploy module apache jenkins java<br/>
+<br/>
+Update one or more modules in a single environment<br/>
+r10k deploy module -e production apache jenkins java<br/>
+<br/>
+Viewing environments<br/>
+<br/>
+You can display information about your environments and modules with the display subcommand.<br/>
+Display all environments being managed by r10k<br/>
+r10k deploy display<br/>
+<br/>
+Display environments and modules<br/>
+<br/>
+To display all r10k-managed environments and Puppetfile modules:<br/>
+r10k deploy display -p<br/>
+<br/>
+You can get detailed information about the expected and actual module versions by adding the --detail flag to this command:<br/>
+r10k deploy display -p --detail<br/>
+<br/>
+/etc/puppetlabs/r10k/r10k.yaml<br/>
+---<br/>
+sources:<br/>
+&nbsp; puppet:<br/>
+&nbsp; &nbsp; remote: 'git://github.com/tessier-ashpool/puppet-modules'<br/>
+&nbsp; &nbsp; basedir: '/etc/puppetlabs/code/environments'<br/>
+<br/>
+r10k deploy environment -pv<br/>
+INFO &nbsp; &nbsp; -&gt; Deploying environment /etc/puppetlabs/puppet/environments/ad_hoc_repo_box<br/>
+INFO &nbsp; &nbsp; -&gt; Deploying environment /etc/puppetlabs/puppet/environments/canary_job<br/>
+INFO &nbsp; &nbsp; -&gt; Deploying environment /etc/puppetlabs/puppet/environments/check_job_status<br/>
+<br/>
+set puppet env<br/>
+puppet agent -t --environment myenv <br/>
+<b><br/>
+</b><b>Notes</b><br/>
+<br/>
+<i>class</i>&nbsp;- a named block of Puppet code that defines a set of associated system resources<br/>
+<br/>
+<i>classification</i>&nbsp;- matching classes to nodes, done on the PE console<br/>
+<br/>
+<i>module</i>&nbsp;- packages all the code and data Puppet needs to manage a given aspect in your infrastructure<br/>
+<br/>
+<i>resource</i>&nbsp;- uppet interprets any aspect of your system configuration you want to manage (users, files, services, and packages, to give some common examples) as a unit<br/>
+<br/>
+<i>manifest - &nbsp;</i>is nothing more than some puppet code saved to a file with the .pp extension<br/>
+<br/>
+<i>singleton</i>&nbsp;- which means that a class can only be declared <i>once</i>&nbsp;on a given node<br/>
+<br/>
+<i>init.pp</i>&nbsp;- &nbsp;main class for a module is always called init.pp<br/>
+<br/>
+<i>site.pp</i>&nbsp;- is the first manifest the Puppet agent checks when it connects to the master. It defines global settings and resource defaults that will apply to all nodes in your infrastructure<br/>
+<br/>
+<i>/etc/puppet/puppet.conf - </i><br/>
+<br/>
+[main]<br/>
+modulepath = $confdir/environments/$environment/modules:$confdir/environments/$environment/<br/>
+[master]<br/>
+manifest = $confdir/environments/$environment/site/manifests/site.pp<b><br/>
+</b><b><br/>
+</b><b>Troubleshooting/Logs</b><br/>
+<br/>
+<br/>
+<br/>
+</body></html>
