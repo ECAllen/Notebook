@@ -2,7 +2,7 @@
 <node>
 <version>6</version>
 <dict>
-  <key>expanded</key><false/>
+  <key>expanded</key><true/>
   <key>title</key><string>Re-Frame</string>
   <key>nodeid</key><string>9fb22929-a933-499f-be71-3090ba83781d</string>
   <key>modified_time</key><integer>1467734539</integer>

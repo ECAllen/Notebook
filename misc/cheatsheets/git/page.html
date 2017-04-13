@@ -4,29 +4,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>git</title>
 </head><body><br/>
-New Repo<br/>
+<b>New Repo</b><br/>
 <br/>
 git init<br/>
 git add &lt;....stuff&gt;<br/>
 git commit<br/>
 <br/>
 <br/>
-Add existing repo to github<br/>
+<b>Add existing repo to github</b><br/>
 <br/>
 create repo on github GUI <br/>
 Then create ssh origin<br/>
 git remote add origin git@github.com:username/new_repo <br/>
 git push -u origin master<br/>
 <br/>
-Switch branch<br/>
+<b>Switch branch</b><br/>
 <br/>
 git checkout &lt;branch name&gt;<br/>
 <br/>
-Create branch<br/>
+<b>Create branch</b><br/>
 <br/>
 git branch &lt;new branch name&gt; <br/>
 <br/>
-Push new branch<br/>
+<b>Push new branch</b><br/>
 <br/>
 git push origin &lt;new branch&gt;<br/>
+<br/>
+<b>Reset a remote git repo</b><br/>
+<br/>
+Delete the .git directory locally.<br/>
+<br/>
+Recreate the git repostory:<br/>
+$ cd (project-directory) <br/>
+$ git init <br/>
+$ (add some files) <br/>
+$ git add . <br/>
+$ git commit -m 'Initial commit' <br/>
+<br/>
+Push to remote server, overwriting. Remember you're going to mess everyone else up doing this … you better be the only client.<br/>
+$ git remote add origin &lt;url&gt; <br/>
+$ git push --force --set-upstream origin master <br/>
 </body></html>
