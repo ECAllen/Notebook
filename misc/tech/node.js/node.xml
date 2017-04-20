@@ -4,12 +4,12 @@
 <dict>
   <key>title</key><string>Node.js</string>
   <key>nodeid</key><string>b510b19b-5373-45d1-ab76-df06e5b1fccb</string>
-  <key>modified_time</key><integer>1492482210</integer>
+  <key>modified_time</key><integer>1492651529</integer>
   <key>version</key><integer>6</integer>
   <key>content_type</key><string>text/xhtml+xml</string>
   <key>created_time</key><integer>1489545158</integer>
   <key>info_sort_dir</key><integer>1</integer>
-  <key>order</key><integer>6</integer>
+  <key>order</key><integer>5</integer>
   <key>info_sort</key><string>order</string>
 </dict>
 </node>
