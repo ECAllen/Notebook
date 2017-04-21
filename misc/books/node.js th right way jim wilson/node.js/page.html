@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Node.js</title>
+</head><body><br/>
+<b>Preface and Ch 1</b><br/>
+<br/>
+event loop<br/>
+while {<ul><li style="list-style-type: none">event</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">execute callbacks</li>
+</ul>
+</li>
+<li style="list-style-type: none">if nothing to do then exit</li>
+</ul>
+}<b><br/>
+</b><b><br/>
+Ch 2<br/>
+<br/>
+</b>EventEmitter - channel for events to be dispatched and listeners notified. <b><br/>
+</b><b><br/>
+</b>Buffer - Nodes way of representing binary data. It points to a blob of memory allocated by Nodes native core, outside of the JS engine. Buffers can't be resized and they require encoding and decoding to convert to and from JS strings.<br/>
+<br/>
+pipe() method captures data from Streams<br/>
+<br/>
+event listener - callback function that is invoked when a event of a speified type is dispatched. <br/>
+<br/>
+Stream class inhertis from EventEmitter<br/>
+<br/>
+on() method adds listener for event type<br/>
+<br/>
+node modules sometimes have synchronous versions usually ending in *Sync<br/>
+<br/>
+rule of thumb is to use synchronous methods during initialization but not in the even loop<br/>
+<br/>
+<br/>
+<b>Ch 3<br/>
+<br/>
+</b>Outline of setting up socket<br/>
+<br/>
+net = require('net');<br/>
+server = net.createServer(function(connnection) {<ul><li style="list-style-type: none">connection.write("blah");</li>
+<li style="list-style-type: none">connection.on('close', function() { </li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">// some code</li>
+</ul>
+</li>
+</ul>
+...<ul><li style="list-style-type: none"></li>
+</ul>
+server.listen(8000, function () {<ul><li style="list-style-type: none">console.log('listening...');</li>
+</ul>
+});<br/>
+<br/>
+example sending JSON<br/>
+<br/>
+connection.write(JSON.stringify({<ul><li style="list-style-type: none">key: 'string value',</li>
+<li style="list-style-type: none">anotherkey: somevar</li>
+<li style="list-style-type: none">}) + '/n');</li>
+<li style="list-style-type: none"></li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none"></li>
+</ul>
+</li>
+</ul>
+<br/>
+<br/>
+<br/>
+</body></html>

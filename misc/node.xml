@@ -22,7 +22,7 @@
   <key>title</key><string>Surf</string>
   <key>column_widths</key><dict>
     <key>created_time</key><integer>150</integer>
-    <key>modified_time</key><integer>1250</integer>
+    <key>modified_time</key><integer>1446</integer>
     <key>title</key><integer>309</integer>
   </dict>
   <key>attr_defs</key><array>
