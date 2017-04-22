@@ -51,21 +51,21 @@ server.listen(8000, function () {<ul><li style="list-style-type: none">console.l
 </ul>
 });<br/>
 <br/>
-example sending JSON<br/>
+E<i>xample sending JSON</i><br/>
 <br/>
 connection.write(JSON.stringify({<ul><li style="list-style-type: none">key: 'string value',</li>
 <li style="list-style-type: none">anotherkey: somevar</li>
 <li style="list-style-type: none">}) + '/n');</li>
 <li style="list-style-type: none"></li>
 </ul>
-Receiving data<br/>
+<i>Receiving data</i><br/>
 <br/>
 client.on('data', function(data) { <ul><li style="list-style-type: none">let message = JSON.parse(data);</li>
 <li style="list-style-type: none">if (message.type === 'watching') {</li>
 <li style="list-style-type: none">&nbsp;.....</li>
 <li style="list-style-type: none"></li>
 </ul>
-Extending Core Classes in Custom Modules<br/>
+<i>Extending Core Classes in Custom Modules in node.js</i><br/>
 <br/>
 const<br/>
 events = require('events'),<br/>
@@ -74,8 +74,46 @@ util = require('util'),<br/>
 LDJClient = function(stream) {<ul><li style="list-style-type: none">events.EventEmitter.call(this);</li>
 </ul>
 };<br/>
-util.inherits(LDJClient, events.EventEmitter);<ul><li style="list-style-type: none"></li>
+// causes lookup -&gt; LDJClient then EventEmitter, inheritance<br/>
+util.inherits(LDJClient, events.EventEmitter);<br/>
+<br/>
+to use the above code<br/>
+<br/>
+const client = new LDJClient(networkStream);<br/>
+client.on('message', function(message) {<ul><li style="list-style-type: none">// do something</li>
 </ul>
+});<ul><li style="list-style-type: none"></li>
+</ul>
+<b>Ch 4</b><br/>
+<br/>
+<i>ZMQ pub/sub pattern</i><br/>
+<br/>
+<i>pub</i><br/>
+<br/>
+'use strict';<br/>
+const<ul><li style="list-style-type: none">zmq = require('zmq'),</li>
+<li style="list-style-type: none">publisher = zmq.socket('pub'),</li>
+<li style="list-style-type: none">...</li>
+</ul>
+publisher.send(JSON.stringify({ <ul><li style="list-style-type: none">...</li>
+</ul>
+});<br/>
+publisher.bind('tcp://*:5432', function(err) {<ul><li style="list-style-type: none">console.log('Listening for zmq subscirbers');</li>
+</ul>
+});<br/>
+<br/>
+<i>sub</i><br/>
+<br/>
+const<ul><li style="list-style-type: none">zmq = require('zmq'),</li>
+<li style="list-style-type: none">subscriber = zmq.socket('sub');</li>
+</ul>
+subscriber.subscribe("");<br/>
+subscriber.on("message", function(data) {<ul><li style="list-style-type: none">...</li>
+</ul>
+});<br/>
+subscriber.connect("tcp://loaclhost:5432");<ul><li style="list-style-type: none"></li>
+</ul>
+<br/>
 <br/>
 <br/>
 <br/>
