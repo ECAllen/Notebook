@@ -57,10 +57,26 @@ connection.write(JSON.stringify({<ul><li style="list-style-type: none">key: 'str
 <li style="list-style-type: none">anotherkey: somevar</li>
 <li style="list-style-type: none">}) + '/n');</li>
 <li style="list-style-type: none"></li>
-<li style="list-style-type: none"><ul><li style="list-style-type: none"></li>
 </ul>
-</li>
+Receiving data<br/>
+<br/>
+client.on('data', function(data) { <ul><li style="list-style-type: none">let message = JSON.parse(data);</li>
+<li style="list-style-type: none">if (message.type === 'watching') {</li>
+<li style="list-style-type: none">&nbsp;.....</li>
+<li style="list-style-type: none"></li>
 </ul>
+Extending Core Classes in Custom Modules<br/>
+<br/>
+const<br/>
+events = require('events'),<br/>
+util = require('util'),<br/>
+// client constructor<br/>
+LDJClient = function(stream) {<ul><li style="list-style-type: none">events.EventEmitter.call(this);</li>
+</ul>
+};<br/>
+util.inherits(LDJClient, events.EventEmitter);<ul><li style="list-style-type: none"></li>
+</ul>
+<br/>
 <br/>
 <br/>
 <br/>
