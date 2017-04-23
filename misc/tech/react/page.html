@@ -3,5 +3,76 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>react</title>
-</head><body><br/>
+</head><body>from React Tutorial https://facebook.github.io/react/tutorial/tutorial.html 4/23<br/>
+<br/>
+react component - takes in parameters called <i>props</i>&nbsp;and returns a hierachy of views to display via the <i>render</i>&nbsp;method. <br/>
+<br/>
+render method - returns a description of what you want to render, returns a react element/JSX <br/>
+<br/>
+ex.<br/>
+class Square extends React.Component {<br/>
+&nbsp; render() {<br/>
+&nbsp; &nbsp; return (<br/>
+&nbsp; &nbsp; &nbsp; &lt;button className="square"&gt;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; {/* TODO */}<br/>
+&nbsp; &nbsp; &nbsp; &lt;/button&gt;<br/>
+&nbsp; &nbsp; );<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+react state - components can have state by setting this.state in the constructor <br/>
+ex.<br/>
+class Square extends React.Component {<br/>
+&nbsp; constructor() {<br/>
+&nbsp; &nbsp; super();<br/>
+&nbsp; &nbsp; this.state = {<br/>
+&nbsp; &nbsp; &nbsp; value: null,<br/>
+&nbsp; &nbsp; };<br/>
+&nbsp; }<br/>
+&nbsp; // ...<br/>
+}<br/>
+<br/>
+proprogating state<br/>
+<b>* When you want to aggregate data from multiple children or to have two child components communicate with each other, move the state upwards so that it lives in the parent component. The parent can then pass the state back down to the children via props, so that the child components are always in sync with each other and with the parent.<br/>
+<br/>
+</b>controlled components - when child components get there state from parent components and message parents upon state change.<br/>
+<br/>
+Immutability - &nbsp;"The biggest benefit of immutability in React comes when you build simple pure components. Since immutable data can more easily determine if changes have been made it also helps to determine when a component requires being re-rendered.<br/>
+To learn how you can build pure components take a look at shouldComponentUpdate(). Also, take a look at the Immutable.js library to strictly enforce immutable data."<br/>
+<br/>
+ex.<br/>
+with mutation<br/>
+var player = {score:1, name: 'Jeff'};<br/>
+player.score = 2;<br/>
+<br/>
+without mutation<br/>
+var player = {score: 1, name: 'Jeff'};<br/>
+var newPlayer = Object.assign({}, player, {score: 2});<br/>
+<br/>
+stateless functional components - for components that only have a render method, rather than define a class simply create a function<br/>
+<br/>
+ex.<br/>
+function Square(props) {<ul><li style="list-style-type: none">return (</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">&lt;button className="square" ....&gt;</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">{props.value}</li>
+</ul>
+</li>
+<li style="list-style-type: none">&lt;/button&gt;</li>
+</ul>
+</li>
+<li style="list-style-type: none">);</li>
+</ul>
+}<br/>
+<br/>
+Keys<br/>
+<br/>
+key property is needed for react to differentiate elements in a list. &nbsp;uses "key" and property internally. * <b>It's strongly recommended that you assign proper keys whenever you build dynamic lists.</b>&nbsp;<br/>
+<br/>
+<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"></li>
+<li style="list-style-type: none">&nbsp;</li>
+</ul>
+</li>
+</ul>
+<br/>
+<br/>
 </body></html>
