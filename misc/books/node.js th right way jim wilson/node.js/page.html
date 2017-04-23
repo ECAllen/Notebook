@@ -113,6 +113,69 @@ subscriber.on("message", function(data) {<ul><li style="list-style-type: none">.
 });<br/>
 subscriber.connect("tcp://loaclhost:5432");<ul><li style="list-style-type: none"></li>
 </ul>
+zmq ROUTER - parallel REP socket, router socket can handle many requests simultaneously. <br/>
+<br/>
+zmq DEALER - parallel REQ socket<br/>
+<br/>
+Clustering node.js<br/>
+<br/>
+node uses processes to cluster and scale<br/>
+<br/>
+fork() - from cluster module, creates a worker process running the same code like (Perl)<br/>
+<br/>
+const cluster = require('cluster');<br/>
+if (cluster.isMaster) {<ul><li style="list-style-type: none">// fork some workers</li>
+<li style="list-style-type: none">for (let i =0; i &lt; 10; i++) {</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">cluster.fork();</li>
+</ul>
+</li>
+<li style="list-style-type: none">}</li>
+</ul>
+}else{<ul><li style="list-style-type: none">// this is a worker process</li>
+<li style="list-style-type: none">do something ...</li>
+</ul>
+}<br/>
+<br/>
+listen for workers coming online<br/>
+<br/>
+cluster.on('online',<ul><li style="list-style-type: none">function(worker) {</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">console.log('Worker' + worker.process.pid + ' is online.');</li>
+</ul>
+</li>
+</ul>
+});<ul><li style="list-style-type: none"></li>
+</ul>
+listen for exit<ul><li style="list-style-type: none"></li>
+</ul>
+cluster.on('exit', ....<br/>
+<br/>
+<ul><li style="list-style-type: none"></li>
+<li style="list-style-type: none">REQ ---&gt; | ROUTER</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| master proc</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none">| DEALER &#09;-----&gt; REP</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -----&gt; REP</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -----&gt; REP</li>
+<li style="list-style-type: none"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br/>
+zmq Push/Pull - good for pushing jobs, unlike dealer/router it is one way<br/>
+<br/>
+pitfalls<br/>
+<ul><li style="list-style-type: none">first joiner problem - node and zmq so fast that the first puller takes all the jobs before any others are ready </li>
+<li style="list-style-type: none">fix - pusher waits until all the the pullers are online</li>
+<li style="list-style-type: none"></li>
+<li style="list-style-type: none">limited resource problem - basically running out of file descriptors</li>
+<li style="list-style-type: none"></li>
+</ul>
+<b>Ch 5<br/>
+<br/>
+</b><ul><li style="list-style-type: none"></li>
+</ul>
+<br/>
 <br/>
 <br/>
 <br/>
