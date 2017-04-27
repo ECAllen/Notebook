@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>buffalo</title>
+</head><body><br/>
+<b>Run with code reloading</b><br/>
+buffalo dev<br/>
+<br/>
+<b>Breakdown of files<br/>
+</b><br/>
+<i>actions/app.go</i><br/>
+<br/>
+ENV defined (to change: GO_ENV=production ./someBinary)<br/>
+app var defined (New vs. Automatic)<br/>
+middleware setup<br/>
+locales<br/>
+routes defined ex. app.GET("/", HomeHandler)<br/>
+<br/>
+<i>actions/home.go</i><br/>
+<br/>
+handler for home page<br/>
+<br/>
+<i>actions/render.go</i><br/>
+<br/>
+default render engine created<br/>
+<br/>
+<br/>
+<i>templates/application.html</i><br/>
+<br/>
+plush template for render engine from render.go<br/>
+<br/>
+<i>templates/index.html</i><br/>
+<br/>
+plush template for HomeHandler <br/>
+<br/>
+<i>templates/_flash.html<br/>
+<br/>
+</i>partial template for flash messages<br/>
+<br/>
+<br/>
+<b>Generators</b><br/>
+<br/>
+buffalo g --help<br/>
+<br/>
+buffalo generator action --help<br/>
+<br/>
+<br/>
+<i>render engine</i>&nbsp;- &nbsp;used to store information about configuration needed for rendering.<br/>
+<br/>
+</body></html>
