@@ -55,5 +55,56 @@ ex. user generation<br/>
 &gt;buffalo g resource users name email creationDate:Time<br/>
 &gt;buffalo db migrate<br/>
 <br/>
+<b>Plush (template engine)</b><br/>
+<br/>
+plush.Render string context (&lt;- go Context interface)<br/>
+<br/>
+code snippet:<br/>
+ctx := plush.NewContext()<br/>
+ctx.Set("name", "Mark")<br/>
+s, err := plush.Render(html(), ctx)<br/>
+<br/>
+template snippet:<br/>
+&lt;body&gt;<ul><li style="list-style-type: none">Hello &lt;%= name %&gt;</li>
+</ul>
+&lt;/body&gt;<br/>
+<br/>
+template var:<br/>
+&lt;%<br/>
+let greet = "Hi"<br/>
+%&gt;<br/>
+&lt;body&gt;<ul><li style="list-style-type: none">&lt;%= greet&gt; &lt;%= name %&gt;</li>
+<li style="list-style-type: none">or...</li>
+<li style="list-style-type: none">&lt;%= greet + " " + name %&gt;</li>
+</ul>
+&lt;/body&gt;<br/>
+<br/>
+template logic:<br/>
+&lt;%= if (name == "Ethan") { %&gt;<ul><li style="list-style-type: none">Hello &lt;%= name %&gt;</li>
+</ul>
+&lt;% } else { %&gt;<ul><li style="list-style-type: none">Who are you?</li>
+</ul>
+&lt;% } %&gt;<br/>
+<br/>
+template for loop:<br/>
+ctx.Set("names", []string{"john", "paul", "george", "ringo"})<br/>
+<br/>
+&lt;%= for (n) in names { %&gt;<ul><li style="list-style-type: none">&lt;%= n %&gt;</li>
+</ul>
+&lt;% } %&gt;<br/>
+<br/>
+builtin functions:<br/>
+json<br/>
+capitalize etc...<br/>
+<br/>
+template create functions:<br/>
+either in context or with helper<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <br/>
 </body></html>
