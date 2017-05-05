@@ -99,6 +99,25 @@ capitalize etc...<br/>
 <br/>
 template create functions:<br/>
 either in context or with helper<br/>
+context <br/>
+ctx.Set("cap", func(s string) string) {<ul><li style="list-style-type: none">return inflect.Capitlization(s)</li>
+</ul>
+})<br/>
+...<br/>
+&lt;%= cap("ethan") %&gt;<br/>
+<br/>
+*return values should be "safe" content not user content escapes etc...<br/>
+<br/>
+help.Block() - used to get block from template<br/>
+ex. s, err = help.Block()<br/>
+<br/>
+Grift Tasks<br/>
+&nbsp;<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <br/>
 <br/>
 <br/>
