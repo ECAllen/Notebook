@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>title</key><string>vimcasts</string>
+  <key>nodeid</key><string>7e36fdad-d949-47c0-8f41-5b78d6e9d188</string>
+  <key>modified_time</key><integer>1494100917</integer>
+  <key>version</key><integer>6</integer>
+  <key>content_type</key><string>text/xhtml+xml</string>
+  <key>created_time</key><integer>1494100484</integer>
+  <key>order</key><integer>18</integer>
+</dict>
+</node>
