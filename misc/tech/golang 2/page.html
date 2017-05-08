@@ -5,4 +5,73 @@
 <title>golang</title>
 </head><body><br/>
 func ( argname type ) return type { ... }<br/>
+<br/>
+Ch10 Structs and Methods<br/>
+<br/>
+Struct<br/>
+<br/>
+type indentifier struct {<br/>
+&nbsp; &nbsp;field1 type<br/>
+&nbsp; &nbsp;field2 type <br/>
+...<br/>
+}<br/>
+<br/>
+<i>selector:</i>&nbsp;structName.fieldName = value<br/>
+<br/>
+type T struct { ...<br/>
+var s T<br/>
+s.a = 5<br/>
+s.b = 8<br/>
+<br/>
+new - allocates memeory for a struct, returns pointer to allocated storage<br/>
+var t *T = new(T)<br/>
+<br/>
+example:<br/>
+<br/>
+type struct1 struct {<ul><li style="list-style-type: none">i1 int</li>
+<li style="list-style-type: none">f1 float32</li>
+<li style="list-style-type: none">str string</li>
+</ul>
+}<br/>
+<br/>
+func main() {<ul><li style="list-style-type: none">ms := new(struct1)</li>
+<li style="list-style-type: none">ms.i1 = 10</li>
+<li style="list-style-type: none">ms.f1 = 15.5</li>
+<li style="list-style-type: none">ms.str = "blah"</li>
+</ul>
+...<br/>
+<br/>
+<i>struct literal: <br/>
+</i>ms := &amp;struct1{10, 15.5, "blah"}<br/>
+or<br/>
+var mt struct1<br/>
+mt = struct{ 10, 15.5, "blah" }<br/>
+<br/>
+equivalent expressions: new(Type) and &amp;Type{}<br/>
+<br/>
+<i>struct factory:<br/>
+<br/>
+</i>type File struct {<ul><li style="list-style-type: none">fd int</li>
+<li style="list-style-type: none">name string</li>
+</ul>
+}<br/>
+<br/>
+func NewFile(fd int, name string) *File {<ul><li style="list-style-type: none">if fd &lt; 0 {</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">return nil</li>
+</ul>
+</li>
+<li style="list-style-type: none">}</li>
+<li style="list-style-type: none">return &amp;File{fd, name}</li>
+</ul>
+}<br/>
+<br/>
+Nested structs name conflicts:<br/>
+1) outer names hide inner names<br/>
+2) names at same level are an error if the name is used in the program, ambiguity must be fixed<br/>
+<br/>
+<i>reciever</i>&nbsp;- function(method?) that acts on a variable of a certain type, cannot be an interface<br/>
+<br/>
+format of a method:<br/>
+<b>func</b>&nbsp;(recv receiver_type) methodName(parameter_list) (return_value_list) { ...<br/>
+}<br/>
 </body></html>
