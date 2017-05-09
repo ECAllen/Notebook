@@ -117,10 +117,17 @@ func (r Rectangle) Area() float32 {<ul><li style="list-style-type: none">return 
 </ul>
 }<br/>
 <br/>
-func main() {<ul><li style="list-style-type: none">sq1 := new(Square)</li>
-<li style="list-style-type: none">sq1.side = 5</li>
-<li style="list-style-type: none">areaIntf := sq1</li>
-<li style="list-style-type: none">fmt.Printf("area: %f\n", areaIntf.Area())</li>
+func main() {<ul><li style="list-style-type: none">r := Rectangle{5, 3}</li>
+<li style="list-style-type: none">q := &amp;Square{5}</li>
+<li style="list-style-type: none"></li>
+<li style="list-style-type: none">shapes := []Shaper{r, q}</li>
+<li style="list-style-type: none"></li>
+<li style="list-style-type: none">for n, _ := range shapes {</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">fmt.Println("Shape details: ", shapes[n])</li>
+<li style="list-style-type: none">fmt.Println("Area of this shape is: ", shapes[n].Area())</li>
+</ul>
+</li>
+<li style="list-style-type: none">}</li>
 </ul>
 }<br/>
 <br/>
