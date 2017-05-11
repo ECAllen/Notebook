@@ -2,9 +2,10 @@
 <node>
 <version>6</version>
 <dict>
+  <key>expanded</key><true/>
   <key>title</key><string>vim</string>
   <key>nodeid</key><string>9f0568c2-75da-4df8-8f0c-42a045cf0d77</string>
-  <key>modified_time</key><integer>1494029994</integer>
+  <key>modified_time</key><integer>1494510777</integer>
   <key>version</key><integer>6</integer>
   <key>content_type</key><string>text/xhtml+xml</string>
   <key>created_time</key><integer>1494029930</integer>
