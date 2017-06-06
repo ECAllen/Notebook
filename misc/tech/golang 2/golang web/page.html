@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>golang</title>
+</head><body>web notes<br/>
+<br/>
+ServerMux - &nbsp;HTTP request router (or <i>multiplexor</i>). It compares incoming requests against a list of predefined URL paths, and calls the associated handler for the path whenever a match is found. A mux can be thought of as a part of a chain of handler functions. <br/>
+<br/>
+Handlers - write response headers and bodies. It must have a ServeHTTP method with the following signature:<br/>
+&nbsp;<br/>
+ServeHTTP(http.ResponseWriter, *http.Request)<br/>
+<br/>
+<br/>
+code pattern using mux.HandleFunc shortcut:<br/>
+<br/>
+func main() {<br/>
+&nbsp; mux := http.NewServeMux()<br/>
+<br/>
+&nbsp; mux.HandleFunc("/time", timeHandler)<br/>
+<br/>
+&nbsp; log.Println("Listening...")<br/>
+&nbsp; http.ListenAndServe(":3000", mux)<br/>
+}<br/>
+<br/>
+Use closures to pass additional parameters to the handler func:<br/>
+<br/>
+package main<br/>
+<br/>
+import (<br/>
+&nbsp; "log"<br/>
+&nbsp; "net/http"<br/>
+&nbsp; "time"<br/>
+)<br/>
+<br/>
+func timeHandler(format string) http.Handler {<br/>
+&nbsp; fn := func(w http.ResponseWriter, r *http.Request) {<br/>
+&nbsp; &nbsp; tm := time.Now().Format(format)<br/>
+&nbsp; &nbsp; w.Write([]byte("The time is: " + tm))<br/>
+&nbsp; }<br/>
+&nbsp; return http.HandlerFunc(fn)<br/>
+}<br/>
+<br/>
+func main() {<br/>
+&nbsp; mux := http.NewServeMux()<br/>
+<br/>
+&nbsp; th := timeHandler(time.RFC1123)<br/>
+&nbsp; mux.Handle("/time", th)<br/>
+<br/>
+&nbsp; log.Println("Listening...")<br/>
+&nbsp; http.ListenAndServe(":3000", mux)<br/>
+}<br/>
+<br/>
+<br/>
+You might also see this same pattern written as:<br/>
+<br/>
+func timeHandler(format string) http.Handler {<br/>
+&nbsp; return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {<br/>
+&nbsp; &nbsp; tm := time.Now().Format(format)<br/>
+&nbsp; &nbsp; w.Write([]byte("The time is: " + tm))<br/>
+&nbsp; })<br/>
+}<br/>
+<br/>
+Or using an implicit conversion to the HandlerFunc type on return:<br/>
+<br/>
+func timeHandler(format string) http.HandlerFunc {<br/>
+&nbsp; return func(w http.ResponseWriter, r *http.Request) {<br/>
+&nbsp; &nbsp; tm := time.Now().Format(format)<br/>
+&nbsp; &nbsp; w.Write([]byte("The time is: " + tm))<br/>
+&nbsp; }<br/>
+}<br/>
+</body></html>

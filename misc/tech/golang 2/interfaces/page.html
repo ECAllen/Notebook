@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>interfaces</title>
+</head><body>Ch 11 Interfaces and reflection<br/>
+<br/>
+Go's version of polymorphism<br/>
+<br/>
+Interface syntax:<br/>
+type Namer interface {<ul><li style="list-style-type: none">Method1(param_list) return_type</li>
+<li style="list-style-type: none">Method2(param_list) return_type</li>
+<li style="list-style-type: none">...</li>
+</ul>
+}<br/>
+where Namer is a interface type, name of interface is method name plus the "[e]r" suffix or "able"<br/>
+<br/>
+example<br/>
+<br/>
+type Shaper interface {<ul><li style="list-style-type: none">Area() float32</li>
+</ul>
+}<br/>
+<br/>
+type Square struct {<ul><li style="list-style-type: none">side float32</li>
+</ul>
+}<br/>
+<br/>
+type Rectangle struct {<ul><li style="list-style-type: none">length, width float</li>
+</ul>
+}<br/>
+<br/>
+func (sq *Square) Area() float32 {<ul><li style="list-style-type: none">return sq.side * sq.side</li>
+</ul>
+}<br/>
+<br/>
+func (r Rectangle) Area() float32 {<ul><li style="list-style-type: none">return r.length * r.width</li>
+</ul>
+}<br/>
+<br/>
+func main() {<ul><li style="list-style-type: none">r := Rectangle{5, 3}</li>
+<li style="list-style-type: none">q := &amp;Square{5}</li>
+<li style="list-style-type: none"></li>
+<li style="list-style-type: none">shapes := []Shaper{r, q}</li>
+<li style="list-style-type: none"></li>
+<li style="list-style-type: none">for n, _ := range shapes {</li>
+<li style="list-style-type: none"><ul><li style="list-style-type: none">fmt.Println("Shape details: ", shapes[n])</li>
+<li style="list-style-type: none">fmt.Println("Area of this shape is: ", shapes[n].Area())</li>
+</ul>
+</li>
+<li style="list-style-type: none">}</li>
+</ul>
+}<br/>
+<br/>
+</body></html>
